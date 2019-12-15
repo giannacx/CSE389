@@ -1,3 +1,12 @@
+<?php
+include('login.php');
+
+if(isset($_SESSION['login_user'])){
+    header("location : professorIndex.php");
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -9,13 +18,12 @@
     <form action="login.php" method="post">
       <div class="container">
         <b>Email</b>
-        <input type="text" id = "username" name="username" placeholder="Please enter valid SYR email" name="uname" required>
+        <input type="text" placeholder="Please enter valid SYR email" name="uname" required>
 
         <b>Password</b>
-        <input type="password" id="password" name="username" placeholder="Enter Password" name="psw" required>
+        <input type="password" placeholder="Enter Password" name="psw" required>
 
-        <button type="submit" value="Login" name="profLoginBtn">Login</button>
-        <!--<span><?php echo $error: ?></span>-->
+        <button type="submit">Login</button>
       </div>
 
       <div class="container" style="background-color:#f1f1f1">

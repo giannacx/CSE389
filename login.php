@@ -1,4 +1,14 @@
 <?php
+if(empty($POST['username']) || empty($POST['password'])){
+    $error = "Username or Password is invalid";
+}
+
+//When professor Login Button is clicked
+if(isset($_POST['profLoginBtn'])){
+    login();
+}
+
+
 function sanitizeStr($var){
     if(get_magic_quotes_gpc())
     {
@@ -21,6 +31,7 @@ function checkUserLogin($user, $pass)
         $this->HandleError("db login failed");
         return false;
     }
+
     /*PHP has a built in sanitize option tho*/
     $user = $this->SanitizeForSQL($user);
     if (!$this->checkDBLogin($user, $pass))
@@ -43,9 +54,9 @@ function checkDBLogin($username, $password)
     {
         return false;
     }
-    $username = sanitizeStr($username);
-    $password = sanitizeStr($password);
-    $qry = "SELECT username, password FROM users WHERE username === '$username' AND password === '$password'";
+    //$username = sanitizeStr($username);
+    //$password = sanitizeStr($password);
+    $qry = "SELECT `Email`, `Password` FROM `professors` WHERE Email = '$username' AND Password = '$password'";
     $result = mysqli_query($conn, $qry);
     if(!$result || mysqli_num_rows($result) <= 0)
     {
@@ -54,25 +65,37 @@ function checkDBLogin($username, $password)
         $this->HandleError("Username or password doesn't match");
         return false;
     }
-        $result->close();
-        $conn->close();
+        //$result->close();
+        //$conn->close();
         return true;
 }
 /*actual login for user from site*/
 function login()
 {
     if (empty($_POST['username'])) {
-        $this->HandleError("Username is empty");
+        //$errorMessage = HandleError("Username is empty");
+        //echo $errorMessage;
         return false;
     }
     if (empty($_POST['password'])) {
-        $this->HandleError("password is empty");
+        //$errorMessage = HandleError("Password is empty");
+        //echo $errorMessage;
+        return false;
     }
-    $username = sanitizeStr($_POST['username']);
-    $password = sanitizeStr($_POST['password']);
-    if (!$this->checkDBLogin($username, $password))
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    if (checkDBLogin($username, $password))
     {
         return false;
+    }else{
+        echo "worked";
+        //If the login works and finds the users
+        //Create the session
+        session_start();
+        $_SESSION['professorEmail'] = $username;
+        //Send the username to the professorAdminHome.php
+        header('Location: professorAdminHome.php');
+        exit();
     }
     /*
      * going to have to add some type of session management at some point

@@ -1,4 +1,4 @@
-CREATE DATABASE project;
+/*CREATE DATABASE csefinal; */
 
 USE project;
 
@@ -12,10 +12,15 @@ Links VARCHAR(1000)
 
 CREATE TABLE Professors (
 Email VARCHAR(25) PRIMARY KEY,
-CourseCode VARCHAR(10) REFERENCES Courses,
 Password VARCHAR(15) 
 );
 
+CREATE TABLE ProfClasses(
+proClassKey INT PRIMARY KEY AUTO_INCREMENT, 
+CourseCode VARCHAR(10) REFERENCES Courses,
+ FOREIGN KEY (ProfEmail) REFERENCES Professors(Email)
+);
+
 INSERT INTO Professors (Email, CourseCode, Password)
-VALUES ('esyu@syr.edu', 'CSE389', 'badpassword');
+VALUES ('esyu@syr.edu', 'badpassword');
 

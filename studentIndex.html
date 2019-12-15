@@ -2,9 +2,41 @@
 <html lang="en" dir="ltr">
   <head>
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="utf-8">
     <title>Student Homepage</title>
   </head>
   <body>
+    <div id="welcomeProfessor">Welcome!</div>
+    <br>
+    <div class="searchBar">
+      <form action="/action_page.php">
+        <input type="text" id="classSearch" placeholder="Search Courses" name="classSearch">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+    <br><br><br><br><br>
+    <div id="departmentList">
+      <div id="courseTitle">Browse Courses by Department</div>
+      <ul>
+        <li><a href="./courseOne">Computer Science</a></li>
+        <li><a href="./courseTwo">Electrical Engineering</a></li>
+        <li><a href="./courseTwo">Computer Engineering</a></li>
+        <li><a href="./courseTwo">Aerospace Engineering</a></li>
+        <li><a href="./courseTwo">Mechanical Engineering</a></li>
+        <li><a href="./courseTwo">Bioengineering Engineering</a></li>
+      </ul>
+    </div>
+    <div id="popularCourses">
+      <div id="courseTitle">Popular Courses!</div>
+      <ul>
+        <li><a href="./courseOne">CSE 389</a></li>
+        <li><a href="./courseTwo">CIS 400</a></li>
+        <li><a href="./courseTwo">CIS 352</a></li>
+        <li><a href="./courseTwo">CIS 252</a></li>
+        <li><a href="./courseTwo">CIS 300</a></li>
+        <li><a href="./courseTwo">ECS 100</a></li>
+      </ul>
+    </div>
   </body>
 </html>

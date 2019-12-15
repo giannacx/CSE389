@@ -1,10 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <link rel="stylesheet" href="./style.css">
     <meta charset="utf-8">
-    <title></title>
+    <title>Professor Portal</title>
   </head>
   <body>
-    HELLO
+    <div id="welcomeProfessor">Welcome Professor Yu!</div>
+    <br><br><br><br>
+    <div id="courseList">
+      <div id="courseTitle">Course List</div>
+      <ul>
+        <li><a href="./courseOne">CSE 389</a></li>
+        <li><a href="./courseTwo">CIS 400</a></li>
+      </ul>
+    </div>
+    <form id="addClass">
+      <b>Add Course</b>
+      <br><br>
+      <label for="courseTitle">Course Title</label>
+      <input name="courseTitle" type="text" placeholder="Course Title Here"></input>
+      <br>
+      <label for="courseCode">Course Code:</label>
+      <input name="courseCode" type="text" placeholder="Course Code Here"></input>
+      <br>
+      <label for="courseLinks">Course Links:</label>
+      <input name="courseLinks" type="text" placeholder="Course Links Here"></input>
+      <br>
+      <label for="pictures">Course Pictures:</label>
+      <input name="pictures" type="file" placeholder="Add Files"></input>
+      <br>
+      <label for="documents">Course Documents:</label>
+      <input name="documents" type="file" placeholder="Add Douments"></input>
+      <br><br>
+      <input type="submit" value="Create Course"></input>
+    </form>
   </body>
 </html>

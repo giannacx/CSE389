@@ -1,4 +1,5 @@
 body {
+  font-family:sans-serif;
 }
 
 .button {
@@ -36,4 +37,103 @@ table {
   padding-top:15px;
   width: 90%;
   background-color:#DCDCDC;
+}
+
+#welcomeProfessor {
+  margin: auto;
+  font-family:sans-serif;
+  text-align: center;
+  border: 1px black solid;
+  border-radius: 4px;
+  padding-bottom:15px;
+  padding-top:15px;
+  width: 90%;
+  background-color:#DCDCDC;
+}
+
+#courseList {
+  position: absolute;
+  right: 50px;
+  border: 1px black solid;
+  border-radius: 4px;
+  padding: 15px;
+  width: 25%;
+}
+
+a {
+  text-decoration: none;
+  color:#ffa500;
+}
+
+#departmentList {
+  position: absolute;
+  right: 70px;
+  border: 1px black solid;
+  border-radius: 4px;
+  padding: 15px;
+  width: 25%;
+}
+
+#popularCourses {
+  position: absolute;
+  left: 100px;
+  border: 1px black solid;
+  border-radius: 4px;
+  padding: 15px;
+  width: 25%;
+}
+
+
+#courseTitle {
+  text-align: center;
+  text-decoration: underline;
+}
+
+#addClass {
+  position: absolute;
+  left: 100px;
+  border: 1px black solid;
+  border-radius: 4px;
+  padding:10px 30px 10px 30px;
+  text-align: left;
+  width: 600px;
+}
+
+label {
+  font-size: 13px;
+}
+
+
+input[type=text]{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#classSearch {
+  width: 80%;
+}
+
+input[type=file]{
+  padding: 12px 20px;
+}
+
+input[type=submit]{
+  width: 100%;
+  margin: auto;
+  background-color:#000080;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  color:#fff;
+}
+
+.searchBar {
+  position:absolute;
+  left:120px;
+  width: 100%;
 }

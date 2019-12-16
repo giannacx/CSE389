@@ -2,8 +2,9 @@
 
 
 //Get professor email
-session_start();
-//$profEmail = $_SESSION['professorEmail'];
+//session_start();
+$profEmail = $_SESSION['professorEmail'];
+//echo $profEmail;
 
 
 //Create MySQL Connection
@@ -13,13 +14,16 @@ $conn =new mysqli('localhost','root','' );
 $selectedalreadycreateddatabase = mysqli_select_db($conn, "project");
 
 //If the database exists
+/*
 if($selectedalreadycreateddatabase){
     echo "Existing database selected success";
 }else{
     echo "Existing database selected not success";
-}
+}*/
+
+
 //Classes Table Query
-$query = "SELECT * FROM `courses` INNER JOIN `profclasses` ON courses.CourseCode = profclasses.CourseCode WHERE profClasses.ProfEmail = 'professorYu@syr.edu'";
+$query = "SELECT * FROM `courses` INNER JOIN `profclasses` ON courses.CourseCode = profclasses.CourseCode WHERE profClasses.ProfEmail = '$profEmail'";
 $sqlClassesQuery1 = mysqli_query($conn, $query);
 if(!$sqlClassesQuery1){
     printf("Erorr: %s\n", mysqli_error($conn));
@@ -37,25 +41,42 @@ while($row2 = mysqli_fetch_array($sqlClassesQuery2)){
 
 //On submit button
 if(isset($_POST['submit'])){
-    if(getimagesize($_FILES['Image']['tmp_name'])== false){
-        echo "<br/>Please Select an image";
+    if($_FILES['Image']['error']>0){
+        echo "Error: " . $_FILES['Image']['error'];
+    } else{
+        echo "File Name: " . $_FILES["Image"]["name"] . "<br>";
+        echo "File Type: " . $_FILES["Image"]["type"] . "<br>";
+        echo "File Size: " . ($_FILES["Image"]["size"] / 1024) . " KB<br>";
+        echo "Stored in: " . $_FILES["Image"]["tmp_name"];
+    }
+    if($_FILES['Assignment']['error']>0){
+        echo "Error: " . $_FILES['Assignment']['error'];
+    } else{
+        echo "File Name: " . $_FILES["Assignment"]["name"] . "<br>";
+        echo "File Type: " . $_FILES["Assignment"]["type"] . "<br>";
+        echo "File Size: " . ($_FILES["Assignment"]["size"] / 1024) . " KB<br>";
+        echo "Stored in: " . $_FILES["Assignment"]["tmp_name"];
     }
     $CourseCode=$_POST['CourseCode'];
     $CourseTitle=$_POST['CourseTitle'];
-    $CourseImage=$_FILES['Image']['tmp'];
-    $CourseAssignment=$_FILES['Assignment']['TMP_NAME'];
+    $CourseImageName=$_FILES['Image']['name'];
+    $CourseImageType=$_FILES['Image']['type'];
+    $CourseImageContent=$_FILES['Image']['tmp_name'];
+    $CourseAssignmentName=$_FILES['Assignment']['name'];
+    $CourseAssignmentType=$_FILES['Assignment']['type'];
+    $CourseAssignmentContent=$_FILES['Assignment']['tmp_name'];
     $CourseLink=$_POST['Link'];
     $CourseDepartment = $_POST['Department'];
 
-    $CourseImage = base64_encode(file_get_contents(addslashes($CourseImage)));
-    $CourseAssignment = base64_encode(file_get_contents(addslashes($CourseAssignment)));
     
     //Insert Course into database
-    $sqlInsertCourse = "INSERT INTO `Courses`(`CourseCode`, `CourseTitle`, `Pictures`, `Assignments`, `Links`, `Department`) VALUES ('$CourseCode','$CourseTitle', '$CourseImage', '$CourseAssignment', '$CourseLink', '$CourseDepartment')";
+    $sqlInsertCourse = "INSERT INTO `Courses`(`CourseCode`, `CourseTitle`, `PictureName`, `PictureContent`, `PictureType`, `AssignmentsName`, `AssignmentsContent`, `AssignmentsType`, `Links`, `Department`) VALUES ('$CourseCode', '$CourseTitle', '$CourseImageName', '$CourseImageContent', '$CourseImageType', '$CourseAssignmentName','$CourseAssignmentContent', '$CourseAssignmentType', '$CourseLink', '$CourseDepartment')";
+    $result = mysqli_query($conn, $sqlInsertCourse);
+    echo mysqli_error($conn);
     
     //Insert that the professor has this course
     //Have to implement it to find the professor using the session
-    $sqlInsertProfessor = "INSERT INTO `profclasses`(`CourseCode`, `ProfEmail`) VALUES ('$CourseCode', 'professorYu@syr.edu')";
+    $sqlInsertProfessor = "INSERT INTO `profclasses`(`CourseCode`, `ProfEmail`) VALUES ('$CourseCode', '$profEmail')";
 
     
     if(mysqli_query($conn, $sqlInsertCourse)){
@@ -71,7 +92,7 @@ if(isset($_POST['submit'])){
         echo"<br/> Professor Course not added";
     }
 
-    header("Refresh:0");
+    //header("Location: ./professorAdminHome.php");
 
 }
 
@@ -83,7 +104,7 @@ if(isset($_POST['submit'])){
     </head>
     <body>
     <table>
-        <h1>My Classes</h1>
+        <h2>My Classes</h2>
         <table>
             <tr>
                 <th style="width: 150px; color: white; background: #4CAF50; border: 1px solid #ddd">Course Code</th>
@@ -97,10 +118,10 @@ if(isset($_POST['submit'])){
             <tr>
                 <td style ="border: 1px solid #ddd"><?php echo $row1[0];?></td>
                 <td style ="border: 1px solid #ddd"><?php echo $row1[1];?></td>
-                <td style ="border: 1px solid #ddd"><?php echo $row1[2];?></td>
-                <td style ="border: 1px solid #ddd"><?php echo $row1[3];?></td>
-                <td style ="border: 1px solid #ddd"><?php echo $row1[4];?></td>
-                <td style ="border: 1px solid #ddd"><?php echo $row1[5];?></td>
+                <td style ="border: 1px solid #ddd"><a target='_blank' href = "view.php?id=".$row[0].><?php echo $row1[2];?></a></td>
+                <td style ="border: 1px solid #ddd"><a target='_blank' href = '"$row1[7]."'><?php echo $row1[5];?></a></td>
+                <td style ="border: 1px solid #ddd"><?php echo $row1[8];?></td>
+                <td style ="border: 1px solid #ddd"><?php echo $row1[9];?></td>
             </tr>
             <?php endwhile;?>
         </table>

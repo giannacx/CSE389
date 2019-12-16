@@ -6,15 +6,15 @@
     <title>Professor Homepage</title>
   </head>
   <body>
-    <form action="login.php" method="post">
+    <form action="login.php" method="post" enctype="multipart/form-data">
       <div class="container">
         <b>Email</b>
         <input type="text" id = "username" name="username" placeholder="Please enter valid SYR email" name="uname" required>
 
         <b>Password</b>
-        <input type="password" id="password" name="username" placeholder="Enter Password" name="psw" required>
+        <input type="password" id="password" name="password" placeholder="Enter Password" name="psw" required>
 
-        <button type="submit" value="Login" name="profLoginBtn">Login</button>
+        <button type="submit" value="Login" name="profLoginBtn" id = "profLoginBtn">Login</button>
         <!--<span><?php echo $error: ?></span>-->
       </div>
 

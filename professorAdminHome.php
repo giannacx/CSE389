@@ -1,3 +1,10 @@
+<?php
+//Get professor email
+session_start();
+$profEmail = $_SESSION['professorEmail'];
+//echo $profEmail;
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -6,9 +13,12 @@
     <link rel="stylesheet" href="profAdminCSS.css">
   </head>
   <body>
+    <h1>Signed in as <?php echo $profEmail;?> </h1>
 
+
+    <h2>Enter a class</h2>
     <form action="professorAdmin.php" method="post" enctype="multipart/form-data">
-      <table>
+      <table style = "background: #4CAF50;">
           <tr>
             <td>Enter Course Code</td>
             <td><input type="text" name="CourseCode" id="CourseCode"></td>
@@ -39,6 +49,7 @@
         </table>
     </form>
 
+    <br/>
     <?php include 'professorAdmin.php'?>
       <!--<script>
         function openForm() {

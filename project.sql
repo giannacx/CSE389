@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2019 at 02:39 AM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.8
+-- Generation Time: Dec 16, 2019 at 09:46 PM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.1.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -31,8 +31,12 @@ SET time_zone = "+00:00";
 CREATE TABLE `courses` (
   `CourseCode` varchar(10) NOT NULL,
   `CourseTitle` varchar(25) DEFAULT NULL,
-  `Pictures` longblob DEFAULT NULL,
-  `Assignments` longblob DEFAULT NULL,
+  `PictureName` varchar(50) NOT NULL,
+  `PictureContent` longblob DEFAULT NULL,
+  `PictureType` varchar(50) NOT NULL,
+  `AssignmentsName` varchar(50) NOT NULL,
+  `AssignmentsContent` longblob DEFAULT NULL,
+  `AssignmentsType` varchar(50) NOT NULL,
   `Links` varchar(1000) DEFAULT NULL,
   `Department` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -41,10 +45,8 @@ CREATE TABLE `courses` (
 -- Dumping data for table `courses`
 --
 
-INSERT INTO `courses` (`CourseCode`, `CourseTitle`, `Pictures`, `Assignments`, `Links`, `Department`) VALUES
-('', '', '', '', '', NULL),
-('ECS 102', 'Python Programming', '', '', 'https://ecs.syr.edu/faculty/baruch/ecs102/', 'ECS'),
-('YO', 'Web System Architecture a', '', '', 'https://cs.fit.edu/~mmahoney/cse4232/tcpip.html', 'ECS');
+INSERT INTO `courses` (`CourseCode`, `CourseTitle`, `PictureName`, `PictureContent`, `PictureType`, `AssignmentsName`, `AssignmentsContent`, `AssignmentsType`, `Links`, `Department`) VALUES
+('ECS 101', 'Intro to Computer Science', 'syllabus-ECS101-Fall-2013(1).pdf', 0x433a78616d7070096d70706870463145352e746d70, 'applicatio', 'Assingment 3.docx', 0x433a78616d7070096d70706870463146362e746d70, 'applicatio', 'ecs101@syr.edu', 'ECS');
 
 -- --------------------------------------------------------
 
@@ -63,8 +65,7 @@ CREATE TABLE `profclasses` (
 --
 
 INSERT INTO `profclasses` (`ProfClassKey`, `CourseCode`, `ProfEmail`) VALUES
-(2, 'YO', 'professorYu@syr.edu'),
-(3, 'ECS 102', 'professorYu@syr.edu');
+(22, 'ECS 101', 'professorYu@syr.edu');
 
 -- --------------------------------------------------------
 
@@ -82,6 +83,7 @@ CREATE TABLE `professors` (
 --
 
 INSERT INTO `professors` (`Email`, `Password`) VALUES
+('loru@syr.edu', 'password'),
 ('professorYu@syr.edu', 'pass123');
 
 --
@@ -116,7 +118,7 @@ ALTER TABLE `professors`
 -- AUTO_INCREMENT for table `profclasses`
 --
 ALTER TABLE `profclasses`
-  MODIFY `ProfClassKey` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ProfClassKey` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Constraints for dumped tables
